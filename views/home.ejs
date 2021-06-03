@@ -26,6 +26,15 @@
                     <div class="form-group">
                         <label>Game Title</label>
                         <input id="game_title" class="form-control" type="text" required/>
+                        <div id="alert_area_game_title">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label>My Email</label>
+                        <input id="my_email" class="form-control" type="email" required/>
+                        <div id="alert_area_my_email">
+                        </div>
                     </div>
                     <hr/>
                     <div class="form-group">
@@ -33,6 +42,8 @@
                         <div class="row">
                             <button id="user_role_1" type="button" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
                             <button id="user_role_2" type="button" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
+                        </div>
+                        <div id="alert_area_game_position">
                         </div>
                     </div>
                     <hr/>
@@ -50,10 +61,12 @@
                                         <div class="modal-body">
                                             Input email of the person:
                                             <input id="oppo_email" class="form-control" type="email" required/>
+                                            <div id="alert_area_oppo_email">
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button id="start_room" type="submit" class="btn btn-primary" data-dismiss="modal">Invite Person</button>
+                                            <button id="start_room" type="button" class="btn btn-primary">Invite Person</button>
                                         </div>
                                     </div>
                                 </div>
