@@ -1,6 +1,8 @@
 <%- include('./includes/head.ejs') %>
 <ul class="nav nav-tabs">
-    <li class="active"><a id="home">Home</a>
+    <li class="active"><a id="home">TicTacToe</a>
+    </li>
+    <li class=""><a id="home">Chess</a>
     </li>
 </ul>
 <div class="panel-body">
@@ -23,18 +25,43 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label>Game Title</label>
-                        <input class="form-control" type="text" />
+                        <input id="game_title" class="form-control" type="text" required/>
                     </div>
+                    <hr/>
                     <div class="form-group">
                         <label>Game Position</label>
                         <div class="row">
-                            <button type="submit" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
-                            <button type="submit" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
+                            <button id="user_role_1" type="button" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
+                            <button id="user_role_2" type="button" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
                         </div>
                     </div>
+                    <hr/>
                     <div class="form-group">
                         <label>Select Opponent</label>
-                        <input class="form-control" type="text" />
+                        <div class="panel-body">
+                            <button id="user_invite" type="button" class="btn btn-info col-md-12" data-toggle="modal" data-target="#invite_modal">Invite</button>
+                            <div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="inviteModalLabel">Invide By Email</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Input email of the person:
+                                            <input id="oppo_email" class="form-control" type="email" required/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button id="start_room" type="submit" class="btn btn-primary" data-dismiss="modal">Invite Person</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <button id="user_random" type="button" class="btn btn-info col-md-12">Random</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,70 +73,36 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label>Select Example</label>
-                        <select class="form-control">
-                            <option>One Vale</option>
-                            <option>Two Vale</option>
-                            <option>Three Vale</option>
-                            <option>Four Vale</option>
-                        </select>
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <label>Multiple Select Example</label>
-                        <select multiple="" class="form-control">
-                            <option>One Vale</option>
-                            <option>Two Vale</option>
-                            <option>Three Vale</option>
-                            <option>Four Vale</option>
-                        </select>
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <label>Checkboxes</label>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Checkbox Example One
-                            </label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-info col-md-4">Refresh</button>
+                                <button type="button" class="btn btn-info col-md-offset-4 col-md-4">Join</button>
+                            </div>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Checkbox Example Two
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Checkbox Example Three
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />Checkbox Example Four
-                            </label>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="form-group">
-                        <label>Radio Button Examples</label>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">Radio Example One
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio Example Two
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio Example Three
-                            </label>
-                        </div>
+
+                        <ul class="form-control gamelist-group">
+                            <li class="gamelist-item">
+                                <div class="gamelist-item-title">
+                                    Glory     
+                                </div>
+                                <div class="gamelist-item-email">
+                                    tuktarov2121@gmail.com
+                                </div>
+                            </li>
+                            <li class="gamelist-item">
+                                <div class="gamelist-item-title">
+                                    Glory     
+                                </div>
+                                <div class="gamelist-item-email">
+                                    tuktarov2121@gmail.com
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="assets/js/game_board.js"></script>
 <%- include('./includes/end.ejs') %>

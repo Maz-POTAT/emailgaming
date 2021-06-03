@@ -46,5 +46,3 @@
         mainApp.custom_fun();
     });
 }(jQuery));
-
-
