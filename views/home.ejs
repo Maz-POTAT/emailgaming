@@ -40,8 +40,8 @@
                     <div class="form-group">
                         <label>Game Position</label>
                         <div class="row">
-                            <button id="user_role_1" type="button" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
-                            <button id="user_role_2" type="button" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
+                            <button id="my_position_1" type="button" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
+                            <button id="my_position_2" type="button" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
                         </div>
                         <div id="alert_area_game_position">
                         </div>
@@ -51,6 +51,8 @@
                         <label>Select Opponent</label>
                         <div class="panel-body">
                             <button id="user_invite" type="button" class="btn btn-info col-md-12" data-toggle="modal" data-target="#invite_modal">Invite</button>
+                            <div id="alert_area_invite_error">
+                            </div>
                             <div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

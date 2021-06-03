@@ -12,6 +12,7 @@ const User = sequelize.define("user", {
   email: Sequelize.STRING,
   firstname: Sequelize.STRING,
   lastname: Sequelize.STRING,
+  password: Sequelize.STRING,
 });
 
 module.exports = User;

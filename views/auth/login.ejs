@@ -1,32 +1,32 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/forms.css">
-<link rel="stylesheet" href="/css/auth.css">
-</head>
-
-<body>
-     <%- include('../includes/navigation.ejs') %>
-
-     <main>
-          <% if (errorMessage) { %>
-          <div class="user-message user-message--error"><%= errorMessage %></div>
-          <% } %>
-          <form class="login-form" action="/login" method="POST">
-               <div class="form-control">
-                    <label for="email">Email</label>
-                    <input class="<%= validationError.find(e=> e.param === 'email') ? 'invalid' : '' %>" type="text"
-                         name='email' id="email" value="<%= oldInput.email%>">
+<div class="row">
+     <div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6 col-xs-12">
+          <div class="panel panel-info">
+               <div class="panel-heading">
+               LOG IN
                </div>
-               <div class="form-control">
-                    <label for="password">password</label>
-                    <input class="<%= validationError.find(e=> e.param === 'password') ? 'invalid' : '' %>"
-                         type="password" name='password' id="password" value="<%= oldInput.password%>">
+               <div class="panel-body">
+                    <form role="form">
+                         <div class="form-group">
+                              <label>Enter Email</label>
+                              <input id="user_email" class="form-control" type="text" />
+                              <div id="alert_area_user_email">
+                              </div>
+                         </div>
+                         <div class="form-group">
+                              <label>Enter Password</label>
+                              <input id="user_password" class="form-control" type="password" />
+                              <div id="alert_area_user_password">
+                              </div>
+                         </div>
+                         <button id="login" type="button" class="btn btn-info">Log In Now </button>
+                         <button id="send_password" type="button" class="btn btn-warning">Send My Password </button>
+                         <div id="alert_area_login_failed">
+                         </div>
+                    </form>
                </div>
-               <button class="btn" type="submit">Submit</button>
-          </form>
-          <div class="centered">
-               <a href="/reset">Reset password</a>
           </div>
-
-     </main>
-
-     <%- include('../includes/end.ejs') %>
+     </div>
+</div>
+<script src="assets/js/login.js"></script>
+<%- include('../includes/end.ejs') %>

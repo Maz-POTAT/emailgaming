@@ -1,33 +1,33 @@
-﻿var user_role = -1;
+﻿var my_position = -1;
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
   
 $(document).ready(function () {
-    $('body').on('click', '#user_role_1', function(){
-        if($('#user_role_1').hasClass('active')){
-            $('#user_role_1').toggleClass('active');
-            user_role = -1;
+    $('body').on('click', '#my_position_1', function(){
+        if($('#my_position_1').hasClass('active')){
+            $('#my_position_1').toggleClass('active');
+            my_position = -1;
         }else{
-            $('#user_role_1').toggleClass('active');
-            if($('#user_role_2').hasClass('active')){
-                $('#user_role_2').toggleClass('active');
+            $('#my_position_1').toggleClass('active');
+            if($('#my_position_2').hasClass('active')){
+                $('#my_position_2').toggleClass('active');
             }
-            user_role = 0;
+            my_position = 0;
         }
     })
 
-    $('body').on('click', '#user_role_2', function(){
-        if($('#user_role_2').hasClass('active')){
-            $('#user_role_2').toggleClass('active');
-            user_role = -1;
+    $('body').on('click', '#my_position_2', function(){
+        if($('#my_position_2').hasClass('active')){
+            $('#my_position_2').toggleClass('active');
+            my_position = -1;
         }else{
-            $('#user_role_2').toggleClass('active');
-            if($('#user_role_1').hasClass('active')){
-                $('#user_role_1').toggleClass('active');
+            $('#my_position_2').toggleClass('active');
+            if($('#my_position_1').hasClass('active')){
+                $('#my_position_1').toggleClass('active');
             }
-            user_role = 1;
+            my_position = 1;
         }
     })
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 bSuccess = false;
             }
 
-            if (user_role != -1) {
+            if (my_position != -1) {
                 $('#alert_area_game_position').html('');
             } else{
                 $('#alert_area_game_position').html('<div class="alert alert-danger alert-dismissable">\
@@ -67,7 +67,26 @@ $(document).ready(function () {
             $('#alert_area_oppo_email').html('');
             $('#invite_modal').modal('hide');
             if(bSuccess)
-                alert('ok');
+            {
+                $('#alert_area_invite_error').html('');
+                $.ajax({
+                    type: "POST",
+                    url: '/create_game',
+                    data: {
+                        game_title: $('#game_title').val(),
+                        my_position: my_position,
+                        my_email: $('#my_email').val(),
+                        oppo_email: $('#oppo_email').val(),
+                    },
+                    dataType: 'json',
+                    error: function(xhr){
+                        $('#alert_area_invite_error').html('<div class="alert alert-danger alert-dismissable">\
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                            Failed to create a game.\
+                        </div>');
+                    }
+                  });                
+            }
         }
         else{
             $('#alert_area_oppo_email').html('<div class="alert alert-danger alert-dismissable">\
