@@ -70,19 +70,30 @@ $(document).ready(function () {
             {
                 $('#alert_area_invite_error').html('');
                 $.ajax({
-                    type: "POST",
+                    type: "Post",
                     url: '/create_game',
                     data: {
+                        game_id: 1,
                         game_title: $('#game_title').val(),
                         my_position: my_position,
                         my_email: $('#my_email').val(),
                         oppo_email: $('#oppo_email').val(),
                     },
-                    dataType: 'json',
-                    error: function(xhr){
+                    success: function(result){
+                        if(result.success){
+                            window.location='/game?room_id=' + result.room_id + "&my_email="+ result.my_email;
+                        }
+                        else{
+                            $('#alert_area_invite_error').html('<div class="alert alert-danger alert-dismissable">\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                                ' + result.errorMessage + '.\
+                            </div>');
+                        }
+                    },
+                    error: function(xhr, status, err){
                         $('#alert_area_invite_error').html('<div class="alert alert-danger alert-dismissable">\
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
-                            Failed to create a game.\
+                            ' + err + '.\
                         </div>');
                     }
                   });                

@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const loginRoutes = require("./routes/login");
 const indexRoutes = require("./routes/index");
+const roomRoutes = require("./routes/room");
 const authmiddleware = require("./middleware/auth");
 const sequelize = require("./utils/database");
 const flash = require("connect-flash");
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(flash());
 app.use(authmiddleware);
 app.use(loginRoutes);
+app.use(roomRoutes);
 app.use("/", indexRoutes);
 const PORT = process.env.PORT || 3000;
 sequelize

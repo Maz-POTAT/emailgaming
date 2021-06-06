@@ -24,11 +24,22 @@
                         email: $('#user_email').val(),
                         password: $('#user_password').val(),
                     },
-                    dataType: 'json',
-                    error: function(xhr){
+                    success: function(result){
+                        if(result.success == true){
+                            window.location='/';
+                        }
+                        else
+                        {
+                            $('#alert_area_login_failed').html('<div class="alert alert-danger alert-dismissable">\
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                                ' + result.reason + '\
+                            </div>');
+                        }
+                    },
+                    error: function(xhr, status, err){
                         $('#alert_area_login_failed').html('<div class="alert alert-danger alert-dismissable">\
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
-                            Failed to login. Please confirm your login information.\
+                            ' + err + '\
                         </div>');
                     }
                 });                
@@ -50,7 +61,6 @@
                 data: {
                     email: $('#user_email').val(),
                 },
-                dataType: 'json',
                 error: function(xhr, status, error){
                     $('#alert_area_login_failed').html('<div class="alert alert-danger alert-dismissable">\
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\

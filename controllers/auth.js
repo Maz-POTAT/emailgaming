@@ -1,11 +1,6 @@
-const express = require("express");
 const User = require("../model/users");
-const bcrypt = require("bcryptjs");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 const crypto = require("./crypto");
-const Sequelize = require("sequelize");
 const transporter = require("./mailserver");
-const Op = Sequelize.Op;
 const { validationResult } = require("express-validator");
 var generator = require('generate-password');
 
@@ -23,7 +18,7 @@ exports.postSendPassword = (req, res, next) => {
         password: newPassword
       });
       if(!user.save())
-        return res.status(422).json( {errorMessage: "invalid email or password!"});
+        return res.status(422).json( {errorMessage: "Failed to send password!"});
     }
     transporter.sendMail({
       to: email,
@@ -42,56 +37,34 @@ exports.postLogin = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).render("auth/login", {
-      errorMessage: errors.array()[0].msg,
-      oldInput: {
-        email: email,
-        password: password
-      },
-      validationError: errors.array()
-    });
+    return res.status(200).json({success: false, reason: 'Invalid username or password'});
   }
 
   User.findOne({ where: { email: email } })
     .then((user) => {
       if (!user) {
-        return res.status(422).render("auth/login", {
-          errorMessage: "invalid email or password!",
-          oldInput: {
-            email: email,
-            password: password
-          },
-          validationError: errors.array()
-        });
+        return res.status(200).json({success: false, reason: 'Username does not exist'});
       }
 
       if(password == user.password){
         res.cookie('email', user.email);
         res.cookie('token', crypto.encrypt(user.email));
-        return res.redirect("/");
+        return res.status(200).json({success: true});
       }
       else{
-        return res.status(422).render("auth/login", {
-          errorMessage: "invalid email or password!",
-          oldInput: {
-            email: email,
-            password: password
-          },
-          validationError: errors.array()
-        });
+        return res.status(200).json({success: false, reason: 'Password is not correct'});
       }
     });
 };
 
 exports.getLogin = (req, res, next) => {
-  res.render("auth/login", {
-    errorMessage: null,
-    oldInput: {
-      email: "",
-      password: ""
-    },
-    validationError: []
-  });
+  res.render("auth/login", { my_email: undefined});
+};
+
+exports.getLogout = (req, res, next) => {
+  res.clearCookie('email');
+  res.clearCookie('token');
+  res.render("auth/login", { my_email: undefined});
 };
 
 exports.postReset = (req, res, next) => {

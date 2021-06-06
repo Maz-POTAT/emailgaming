@@ -10,7 +10,7 @@ const Game = sequelize.define("game", {
     primaryKey: true
   },
   name: Sequelize.STRING,
-  description: Sequelize.STRING,
+  description: Sequelize.TEXT,
 });
 
 module.exports = Game;
