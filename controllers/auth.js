@@ -14,7 +14,7 @@ exports.postSendPassword = (req, res, next) => {
         numbers: true
       });
       user = new User({
-        email: email,
+        email: email.trim(),
         password: newPassword
       });
       if(!user.save())
@@ -58,13 +58,13 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.getLogin = (req, res, next) => {
-  res.render("auth/login", { my_email: undefined});
+  res.render("auth/login", { title: 'Login', my_email: undefined});
 };
 
 exports.getLogout = (req, res, next) => {
   res.clearCookie('email');
   res.clearCookie('token');
-  res.render("auth/login", { my_email: undefined});
+  res.render("auth/login", { title: 'Login', my_email: undefined});
 };
 
 exports.postReset = (req, res, next) => {
