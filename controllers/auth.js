@@ -25,7 +25,7 @@ exports.postSendPassword = async (req, res, next) => {
     subject: "Emailgaming",
     html: "<h1>Your email is " + user.password + "</h1>"
   });
-  return res.status(200);
+  return res.status(200).json({});
 };
 
 exports.postLogin = (req, res, next) => {
