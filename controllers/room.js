@@ -31,7 +31,7 @@ exports.postCreateRoom = async (req, res, next) => {
       numbers: true
     });
     user1 = new User({
-      email: player1.trim(),
+      email: player1,
       password: newPassword
     });
     
@@ -45,7 +45,7 @@ exports.postCreateRoom = async (req, res, next) => {
       numbers: true
     });
     user2 = new User({
-      email: player2.trim(),
+      email: player2,
       password: newPassword
     });
     if(!await user2.save())

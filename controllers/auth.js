@@ -14,7 +14,7 @@ exports.postSendPassword = (req, res, next) => {
         numbers: true
       });
       user = new User({
-        email: email.trim(),
+        email: email,
         password: newPassword
       });
       if(!user.save())
