@@ -4,31 +4,28 @@ const transporter = require("./mailserver");
 const { validationResult } = require("express-validator");
 var generator = require('generate-password');
 
-exports.postSendPassword = (req, res, next) => {
+exports.postSendPassword = async (req, res, next) => {
   const email = req.body.email;
-  User.findOne({ where: { email: email } })
-  .then((user) => {
-    if (!user) {
-      let newPassword = generator.generate({
-        length: 10,
-        numbers: true
-      });
-      user = new User({
-        email: email,
-        password: newPassword
-      });
-      if(!user.save())
-        return res.status(422).json( {errorMessage: "Failed to send password!"});
-    }
-    transporter.sendMail({
-      to: email,
-      from: "jackie.devil001@gmail.com",
-      subject: "Emailgaming",
-      html: "<h1>Your email is" + user.password + "</h1>"
+  var user = await User.findOne({ where: { email: email } });
+  if (!user) {
+    let newPassword = generator.generate({
+      length: 10,
+      numbers: true
     });
-    return res.status(200);
-  })
-  .catch((err) => {return res.status(422).json( {errorMessage: err.message});});
+    user = new User({
+      email: email,
+      password: newPassword
+    });
+    if(!await user.save())
+      return res.status(422).json( {errorMessage: "Failed to send password!"});
+  }
+  await transporter.sendMail({
+    to: email,
+    from: "tuktarov2121@gmail.com",
+    subject: "Emailgaming",
+    html: "<h1>Your email is " + user.password + "</h1>"
+  });
+  return res.status(200);
 };
 
 exports.postLogin = (req, res, next) => {

@@ -65,7 +65,7 @@ exports.postCreateRoom = async (req, res, next) => {
 
   transporter.sendMail({
     to: req.body.oppo_email,
-    from: "jackie.devil001@gmail.com",
+    from: "tuktarov2121@gmail.com",
     subject: "Emailgaming",
     html: "<h1>"+ req.body.my_email + " request a game </h1>"
   });
@@ -99,7 +99,7 @@ exports.postSubmitTurn = async (req, res, next) => {
 
   transporter.sendMail({
     to: req.body.oppo_email,
-    from: "jackie.devil001@gmail.com",
+    from: "tuktarov2121@gmail.com",
     subject: "Emailgaming",
     html: "<h1>It's your trun on "+ room.game_title + " game</h1>"
   });
