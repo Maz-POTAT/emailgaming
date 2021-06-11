@@ -161,7 +161,7 @@ exports.getMyGame = async (req, res, next) => {
   }
 
   let room = await Room.findAll({ 
-    $or: [{ player1_id: my_id }, { player2_id: my_id }],
+    $or: [{ player1_id: { $eq:my_id }}, { player2_id: {$eq:my_id }}],
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
