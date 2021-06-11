@@ -2,7 +2,7 @@ const User = require("../model/users");
 const Room = require("../model/rooms");
 const Game = require("../model/games");
 const Room_Log = require("../model/room_logs");
-
+const { Op } = require("sequelize");
 const crypto = require("./crypto");
 const transporter = require("./mailserver");
 var generator = require('generate-password');
@@ -161,7 +161,7 @@ exports.getMyGame = async (req, res, next) => {
   }
 
   let room = await Room.findAll({ 
-    $or: [{ player1_id: { $eq:my_id }}, { player2_id: {$eq:my_id }}],
+    where: { [Op.or] : [{ player1_id: my_id }, { player2_id: my_id }] },
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
