@@ -88,6 +88,7 @@ exports.postSubmitTurn = async (req, res, next) => {
     if(!await room.save())
       return res.status(200).json( {success: false, errorMessage: "failed to save turn"});
   }
+
   log = new Room_Log({
     room_id: room_id,
     player_id: player_id,
@@ -97,8 +98,15 @@ exports.postSubmitTurn = async (req, res, next) => {
   //   return res.status(200).json( {success: false, errorMessage: "failed to save turn"});
   await log.save();
 
+  let oppo_id = room.player1_id == player_id ? room.player2_id : room.player1_id;
+  let user = await User.findOne({ where: { id: oppo_id } });
+  let oppo_email = "";
+  if(user){
+    oppo_email = user.email;
+  }
+
   transporter.sendMail({
-    to: req.body.oppo_email,
+    to: oppo_email,
     from: "tuktarov2121@gmail.com",
     subject: "Emailgaming",
     html: "<h1>It's your trun on "+ room.game_title + " game</h1>"
@@ -146,10 +154,17 @@ exports.getGame = async (req, res, next) => {
 
 exports.getMyGame = async (req, res, next) => {
   let my_email = req.cookies.email;
+  let user = await User.findOne({ where: { email: my_email } });
+  let my_id = 0;
+  if(user){
+    my_id = user.id;
+  }
+
   let room = await Room.findAll({ 
-    or: [{ player1_id: my_email }, { player2_id: my_email }],
+    or: [{ player1_id: my_id }, { player2_id: my_id }],
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
+  
   if (!room) {
     res.redirect('/');
   }
