@@ -52,10 +52,10 @@
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
-                            <li><a href="/" class="menu-top-active">GAMES</a></li>
-                            <li><a href="/my_turn">MY TURN</a></li>
-                            <li><a href="/my_games">MY GAMES</a></li>
-                            <li><a href="/profile">PROFILE</a></li>
+                            <li><a href="/" class="<%= active_page == 'games' ? 'menu-top-active' : '' %>">GAMES</a></li>
+                            <li><a href="/my_turns" class="<%= active_page == 'turns' ? 'menu-top-active' : '' %>">MY TURN</a></li>
+                            <li><a href="/my_games" class="<%= active_page == 'mine' ? 'menu-top-active' : '' %>">MY GAMES</a></li>
+                            <li><a href="/profile" class="<%= active_page == 'profile' ? 'menu-top-active' : '' %>">PROFILE</a></li>
                         </ul>
                     </div>
                 </div>

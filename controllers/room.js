@@ -7,6 +7,39 @@ const crypto = require("./crypto");
 const transporter = require("./mailserver");
 var generator = require('generate-password');
 
+exports.postCreateRandomRoom = async (req, res, next) => {
+  let game_id = req.body.game_id;
+  let game_title = req.body.game_title;
+  let my_position = req.body.my_position;
+
+  let user = await User.findOne({ where: { email: my_email } });
+  if (!user) {
+    let newPassword = generator.generate({
+      length: 10,
+      numbers: true
+    });
+    user = new User({
+      email: my_email,
+      password: newPassword
+    });
+    
+    if(!await user.save())
+      return res.status(200).json( {success: false, errorMessage: "failed to create game"});
+  }
+
+  let room = new Room({
+    game_id: game_id,
+    game_title: game_title,
+    player1_id: my_position == 0? user.id : 0,
+    player2_id: my_position == 1? user.id : 0,
+    status: 0,
+    data:'{}'
+  });
+  if(!await room.save())
+    return res.status(200).json( {success: false, errorMessage: "failed to create game"});
+  return res.status(200).json({success:true, my_email: req.cookies.email});
+};
+
 exports.postCreateRoom = async (req, res, next) => {
   let game_id = req.body.game_id;
   let game_title = req.body.game_title;
@@ -22,7 +55,6 @@ exports.postCreateRoom = async (req, res, next) => {
     player1 = req.body.oppo_email;
     player2 = req.body.my_email;
   }
-  console.log(game_id, game_title, player1, player2, req.body.my_position);
 
   let user1 = await User.findOne({ where: { email: player1 } });
   if (!user1) {
@@ -171,6 +203,32 @@ exports.getMyGame = async (req, res, next) => {
 
   res.render("my_games", {
     title: 'My Games',
+    active_page: 'mine',
+    my_email: my_email,
+    my_rooms: room.map(function(room_info){return room_info.dataValues}),
+  });
+};
+
+exports.getMyTurn = async (req, res, next) => {
+  let my_email = req.cookies.email;
+  let user = await User.findOne({ where: { email: my_email } });
+  let my_id = 0;
+  if(user){
+    my_id = user.id;
+  }
+
+  let room = await Room.findAll({ 
+    where: { [Op.or] : [ {[Op.and] : [{ player1_id: my_id }, {status: 0}]}, { [Op.and] : [{player2_id: my_id }, {status:1}]}] },
+    include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
+  );
+
+  if (!room) {
+    res.redirect('/');
+  }
+
+  res.render("my_turns", {
+    title: 'My Turns',
+    active_page: 'turns',
     my_email: my_email,
     my_rooms: room.map(function(room_info){return room_info.dataValues}),
   });

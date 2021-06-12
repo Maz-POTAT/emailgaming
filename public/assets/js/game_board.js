@@ -107,6 +107,70 @@ $(document).ready(function () {
             return;
         }
     })
+
+    $('body').on('click', '#user_random', function(){
+        let bSuccess = true;
+        if (validateEmail($('#my_email').val())) {
+            $('#alert_area_my_email').html('');
+        } else{
+            $('#alert_area_my_email').html('<div class="alert alert-danger alert-dismissable">\
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                Please insert a vaild email address.\
+            </div>');
+            bSuccess = false;
+        }
+
+        if (!$('#game_title').val().length == 0) {
+            $('#alert_area_game_title').html('');
+        } else{
+            $('#alert_area_game_title').html('<div class="alert alert-danger alert-dismissable">\
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                Please insert a Game Title.\
+            </div>');
+            bSuccess = false;
+        }
+
+        if (my_position != -1) {
+            $('#alert_area_game_position').html('');
+        } else{
+            $('#alert_area_game_position').html('<div class="alert alert-danger alert-dismissable">\
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                Please choose a game position.\
+            </div>');
+            bSuccess = false;
+        }
+
+        if(bSuccess)
+        {
+            $.ajax({
+                type: "Post",
+                url: '/create_room',
+                data: {
+                    game_id: 1,
+                    game_title: $('#game_title').val(),
+                    my_position: my_position,
+                    my_email: $('#my_email').val(),
+                },
+                success: function(result){
+                    if(result.success){
+                        window.location='/';
+                    }
+                    else{
+                        $('#alert_area_random_error').html('<div class="alert alert-danger alert-dismissable">\
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                            ' + result.errorMessage + '.\
+                        </div>');
+                    }
+                },
+                error: function(xhr, status, err){
+                    $('#alert_area_random_error').html('<div class="alert alert-danger alert-dismissable">\
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>\
+                        ' + err + '.\
+                    </div>');
+                }
+                });                
+        }
+    })
 });
 
 
