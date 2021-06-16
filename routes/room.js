@@ -6,6 +6,10 @@ router.post("/create_game", roomController.postCreateRoom);
 router.post("/create_room", roomController.postCreateRandomRoom);
 router.post("/submit_turn", roomController.postSubmitTurn);
 
+router.get("/start_game",
+   res.render("home", { title: 'Start Game',    active_page: 'start',  my_email: req.cookies.email})
+);
+
 router.get("/game", roomController.getGame);
 router.get("/my_games", roomController.getMyGame);
 router.get("/my_turns", roomController.getMyTurn);

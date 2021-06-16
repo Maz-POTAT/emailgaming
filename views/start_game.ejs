@@ -1,0 +1,125 @@
+<%- include('./includes/head.ejs') %>
+<ul class="nav nav-tabs">
+    <li class="active"><a id="home">TicTacToe</a>
+    </li>
+    <li class=""><a id="home">Chess</a>
+    </li>
+</ul>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12" >
+            <div class="alert alert-info text-center">
+            <h3>Game Details</h3> 
+            <hr />
+            <i class="fa fa-info-circle fa-4x"></i>
+            <p>
+                This is tic tac toe game.
+            </p>
+            </div>
+        </div>            
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                Create Game
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Game Title</label>
+                        <input id="game_title" class="form-control" type="text" required/>
+                        <div id="alert_area_game_title">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label>My Email</label>
+                        <input id="my_email" class="form-control" type="email" value="<%= my_email!=undefined ? my_email : ''%>" required <%= my_email!=undefined ? 'readonly' : ''%>/>
+                        <div id="alert_area_my_email">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label>Game Position</label>
+                        <div class="row">
+                            <button id="my_position_1" type="button" class="btn btn-info col-md-offset-1 col-md-4">White Player</button>
+                            <button id="my_position_2" type="button" class="btn btn-info col-md-offset-2 col-md-4">Black Player</button>
+                        </div>
+                        <div id="alert_area_game_position">
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label>Select Opponent</label>
+                        <div class="panel-body">
+                            <button id="user_invite" type="button" class="btn btn-info col-md-12" data-toggle="modal" data-target="#invite_modal">Invite</button>
+                            <div id="alert_area_invite_error">
+                            </div>
+                            <div class="modal fade" id="invite_modal" tabindex="-1" role="dialog" aria-labelledby="inviteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="inviteModalLabel">Invide By Email</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Input email of the person:
+                                            <input id="oppo_email" class="form-control" type="email" required/>
+                                            <div id="alert_area_oppo_email">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button id="start_room" type="button" class="btn btn-primary">Invite Person</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <button id="user_random" type="button" class="btn btn-info col-md-12">Random</button>
+                            <div id="alert_area_random_error">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                Join Game
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button" class="btn btn-info col-xs-4">Refresh</button>
+                                <button type="button" class="btn btn-info col-xs-offset-4 col-xs-4">Join</button>
+                            </div>
+                        </div>
+
+                        <ul class="form-control gamelist-group">
+                            <li class="gamelist-item">
+                                <div class="gamelist-item-title">
+                                    Glory     
+                                </div>
+                                <div class="gamelist-item-email">
+                                    tuktarov2121@gmail.com
+                                </div>
+                            </li>
+                            <li class="gamelist-item">
+                                <div class="gamelist-item-title">
+                                    Glory
+                                </div>
+                                <div class="gamelist-item-email">
+                                    tuktarov2121@gmail.com
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/game_board.js"></script>
+<%- include('./includes/end.ejs') %>
