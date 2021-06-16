@@ -179,7 +179,8 @@ exports.getGame = async (req, res, next) => {
     player2_email: user2.email,
     room: room,
     bMyTurn: bMyTurn,
-    bResign: bResign
+    bResign: bResign,
+    active_page: '', 
   });
 
 };
