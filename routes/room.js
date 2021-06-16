@@ -7,7 +7,7 @@ router.post("/create_room", roomController.postCreateRandomRoom);
 router.post("/submit_turn", roomController.postSubmitTurn);
 
 router.get("/start_game",
-   res.render("home", { title: 'Start Game',    active_page: 'start',  my_email: req.cookies.email})
+   res.render("start_game", { title: 'Start Game',    active_page: 'start',  my_email: req.cookies.email})
 );
 
 router.get("/game", roomController.getGame);
