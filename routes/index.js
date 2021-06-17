@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const roomController = require("../controllers/room");
 
-router.get("/", (req, res, next) => {
-  res.render("home", { title: 'Home',    active_page: 'home',  my_email: req.cookies.email});
-});
+router.get("/", roomController.getHome);
 
 module.exports = router

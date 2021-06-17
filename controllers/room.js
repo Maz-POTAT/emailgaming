@@ -182,7 +182,6 @@ exports.getGame = async (req, res, next) => {
     bResign: bResign,
     active_page: '', 
   });
-
 };
 
 exports.getMyGame = async (req, res, next) => {
@@ -208,6 +207,11 @@ exports.getMyGame = async (req, res, next) => {
     my_email: my_email,
     my_rooms: room.map(function(room_info){return room_info.dataValues}),
   });
+};
+
+exports.getHome = async (req, res, next) => {
+  let game = await Game.findAll({raw : true});
+  res.render("home", { title: 'Home',    active_page: 'home',  my_email: req.cookies.email, games: game});
 };
 
 exports.getMyTurn = async (req, res, next) => {
