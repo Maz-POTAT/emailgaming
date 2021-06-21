@@ -11,6 +11,7 @@ exports.postCreateRandomRoom = async (req, res, next) => {
   let game_id = req.body.game_id;
   let game_title = req.body.game_title;
   let my_position = req.body.my_position;
+  let my_email = req.body.my_email;
 
   let user = await User.findOne({ where: { email: my_email } });
   if (!user) {
@@ -32,7 +33,7 @@ exports.postCreateRandomRoom = async (req, res, next) => {
     game_title: game_title,
     player1_id: my_position == 0? user.id : 0,
     player2_id: my_position == 1? user.id : 0,
-    status: 0,
+    status: -1,
     data:'{}'
   });
   if(!await room.save())
