@@ -1,7 +1,7 @@
 const User = require("../model/users");
 const crypto = require("../controllers/crypto");
 const authmiddleware = (req,res,next) =>{
-  if(req.url == '/login' || req.url == '/' || req.url == '/send_password' || req.url == '/create_game' || req.url == '/start_game')
+  if(req.url == '/login' || req.url == '/' || req.url == '/send_password' || req.url == '/create_game' || req.url == '/start_game'|| req.url == '/create_room')
   {
     next();
     return;
