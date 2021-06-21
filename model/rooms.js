@@ -27,6 +27,7 @@ const Room = sequelize.define("room", {
   },
   player1_id: {
     type: Sequelize.INTEGER,
+    allowNull: true,
     // references:{
     //   model: User,
     //   key: 'player1_id',
@@ -34,6 +35,7 @@ const Room = sequelize.define("room", {
   },
   player2_id: {
     type: Sequelize.INTEGER,
+    allowNull: true,
     // references:{
     //   model: User,
     //   key: 'player2_id',
@@ -43,8 +45,8 @@ const Room = sequelize.define("room", {
   data: Sequelize.STRING,
 });
 
-Room.belongsTo(sequelize.models.user, {foreignKey: 'player1_id', as: 'Player1', constraints: false});
-Room.belongsTo(sequelize.models.user, {foreignKey: 'player2_id', as: 'Player2', constraints: false});
+Room.belongsTo(sequelize.models.user, {foreignKey: 'player1_id', as: 'Player1', foreignKeyConstraint:false});
+Room.belongsTo(sequelize.models.user, {foreignKey: 'player2_id', as: 'Player2', foreignKeyConstraint:false});
 Room.belongsTo(sequelize.models.game, {foreignKey: 'game_id', as: 'Game'});
 
 module.exports = Room;
