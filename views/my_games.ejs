@@ -1,59 +1,139 @@
 <%- include('./includes/head.ejs') %>
-<% for(let i=0; i<my_rooms.length; i++) {%>
-    <div class="col-md-4 col-sm-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <%= my_rooms[i].Game.name %>
-            </div>
-            <div class="panel-body">
-                <div class="input-group">
-                    <span class="form-group input-group-btn">
-                        <button class="btn btn-default" type="button">Title:</button>
-                      </span>
-                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].game_title%>">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="form-group input-group-btn">
-                        <button class="btn btn-default" type="button">Player1:</button>
-                      </span>
-                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player1.email%>">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="form-group input-group-btn">
-                        <button class="btn btn-default" type="button">Player2:</button>
-                      </span>
-                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player2.email%>">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="form-group input-group-btn">
-                        <button class="btn btn-default" type="button">Status:</button>
-                      </span>
-                    <input type="text" class="form-control" readonly 
-                    <% if(my_rooms[i].status == 0){%>
-                        value="Player1's turn"
-                    <% } else if(my_rooms[i].status == 1){%>
-                        value="Player2's turn"
-                    <% } else if(my_rooms[i].status == 2){%>
-                        value="Player1 has won"
-                    <% } else if(my_rooms[i].status == 3){%>
-                        value="Player2 has won"
-                    <% }%>
-                    >
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <a href="/game?room_id=<%= my_rooms[i].id %>&my_email=<%= my_email %>" class="btn btn-primary col-xs-4">Play</a>
-                        <button type="button" class="btn btn-danger col-xs-offset-4 col-xs-4">Delete</button>
+<div class="col-md-6">
+    <div class="panel panel-info">
+       <div class="panel-heading">
+           Active Game
+       </div>
+       <div class="panel-body">
+        <% for(let i=0; i<my_rooms.length; i++) {%>
+        <% if(my_rooms[i].status<2) { %>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <%= my_rooms[i].Game.name %>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Title:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].game_title%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Player1:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player1.email%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Player2:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player2.email%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Status:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly 
+                            <% if(my_rooms[i].status == 0){%>
+                                value="Player1's turn"
+                            <% } else if(my_rooms[i].status == 1){%>
+                                value="Player2's turn"
+                            <% } else if(my_rooms[i].status == 2){%>
+                                value="Player1 has won"
+                            <% } else if(my_rooms[i].status == 3){%>
+                                value="Player2 has won"
+                            <% }%>
+                            >
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="/game?room_id=<%= my_rooms[i].id %>&my_email=<%= my_email %>" class="btn btn-primary col-xs-4">Play</a>
+                                <button type="button" class="btn btn-danger col-xs-offset-4 col-xs-4">Delete</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        <% }} %>
         </div>
     </div>
-<% } %>
+</div>
+
+<div class="col-md-6">
+    <div class="panel panel-info">
+       <div class="panel-heading">
+           Completed Game
+       </div>
+       <div class="panel-body">
+        <% for(let i=0; i<my_rooms.length; i++) {%>
+        <% if(my_rooms[i].status>=2) { %>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <%= my_rooms[i].Game.name %>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Title:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].game_title%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Player1:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player1.email%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Player2:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player2.email%>">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <span class="form-group input-group-btn">
+                                <button class="btn btn-default" type="button">Status:</button>
+                              </span>
+                            <input type="text" class="form-control" readonly 
+                            <% if(my_rooms[i].status == 0){%>
+                                value="Player1's turn"
+                            <% } else if(my_rooms[i].status == 1){%>
+                                value="Player2's turn"
+                            <% } else if(my_rooms[i].status == 2){%>
+                                value="Player1 has won"
+                            <% } else if(my_rooms[i].status == 3){%>
+                                value="Player2 has won"
+                            <% }%>
+                            >
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="/game?room_id=<%= my_rooms[i].id %>&my_email=<%= my_email %>" class="btn btn-primary col-xs-4">Play</a>
+                                <button type="button" class="btn btn-danger col-xs-offset-4 col-xs-4">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }} %>
+        </div>
+    </div>
+</div>
+
+
+
 <script src="assets/js/my_games.js"></script>
 <%- include('./includes/end.ejs') %>
