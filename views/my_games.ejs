@@ -7,7 +7,7 @@
        <div class="panel-body">
         <% for(let i=0; i<my_rooms.length; i++) {%>
         <% if(my_rooms[i].status<2) { %>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <%= my_rooms[i].Game.name %>
@@ -74,7 +74,7 @@
        <div class="panel-body">
         <% for(let i=0; i<my_rooms.length; i++) {%>
         <% if(my_rooms[i].status>=2) { %>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <%= my_rooms[i].Game.name %>
