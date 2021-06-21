@@ -1,4 +1,10 @@
 <%- include('./includes/head.ejs') %>
+<ul class="nav nav-tabs">
+    <li class="active"><a id="home">TicTacToe</a>
+    </li>
+    <li class=""><a id="home">Chess</a>
+    </li>
+</ul>
 <% for(let i=0; i<my_rooms.length; i++) {%>
     <div class="col-md-4 col-sm-4">
         <div class="panel panel-primary">
@@ -32,15 +38,7 @@
                         <button class="btn btn-default" type="button">Status:</button>
                       </span>
                     <input type="text" class="form-control" readonly 
-                    <% if(my_rooms[i].status == 0){%>
-                        value="Player1's turn"
-                    <% } else if(my_rooms[i].status == 1){%>
-                        value="Player2's turn"
-                    <% } else if(my_rooms[i].status == 2){%>
-                        value="Player1 has won"
-                    <% } else if(my_rooms[i].status == 3){%>
-                        value="Player2 has won"
-                    <% }%>
+                        value="Waiting for join"
                     >
                 </div>
             </div>

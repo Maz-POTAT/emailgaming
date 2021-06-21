@@ -214,16 +214,10 @@ exports.getHome = async (req, res, next) => {
   res.render("home", { title: 'Home',    active_page: 'home',  my_email: req.cookies.email, games: game});
 };
 
-exports.getMyTurn = async (req, res, next) => {
+exports.getJoinGame = async (req, res, next) => {
   let my_email = req.cookies.email;
-  let user = await User.findOne({ where: { email: my_email } });
-  let my_id = 0;
-  if(user){
-    my_id = user.id;
-  }
-
   let room = await Room.findAll({ 
-    where: { [Op.or] : [ {[Op.and] : [{ player1_id: my_id }, {status: 0}]}, { [Op.and] : [{player2_id: my_id }, {status:1}]}] },
+    where: { status: -1},
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
@@ -231,9 +225,9 @@ exports.getMyTurn = async (req, res, next) => {
     res.redirect('/');
   }
 
-  res.render("my_turns", {
-    title: 'My Turns',
-    active_page: 'turns',
+  res.render("join_game", {
+    title: 'Join Game',
+    active_page: 'join',
     my_email: my_email,
     my_rooms: room.map(function(room_info){return room_info.dataValues}),
   });

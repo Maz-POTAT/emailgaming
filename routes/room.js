@@ -12,6 +12,6 @@ router.get("/start_game", (req, res, next) => {
 
 router.get("/game", roomController.getGame);
 router.get("/my_games", roomController.getMyGame);
-router.get("/my_turns", roomController.getMyTurn);
+router.get("/join_game", roomController.getJoinGame);
 
 module.exports = router
