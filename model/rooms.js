@@ -65,8 +65,8 @@ const Room = sequelize.define("room", {
 // })
 // Room.belongsTo(User);
 
-Room.belongsTo(sequelize.models.user, {foreignKey: {name: 'player1_id'}, as: 'Player1', constraints: false});
-Room.belongsTo(sequelize.models.user, {foreignKey: {name: 'player2_id'}, as: 'Player2', constraints: false});
-Room.belongsTo(sequelize.models.game, {foreignKey: {name: 'game_id'}, as: 'Game'});
+Room.belongsTo(sequelize.models.user, {foreignKey: {name: 'player1_id', allowNull: true}, as: 'Player1', constraints: false});
+Room.belongsTo(sequelize.models.user, {foreignKey: {name: 'player2_id', allowNull: true}, as: 'Player2', constraints: false});
+Room.belongsTo(sequelize.models.game, {foreignKey: {name: 'game_id', allowNull: true}, as: 'Game'});
 
 module.exports = Room;
