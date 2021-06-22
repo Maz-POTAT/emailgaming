@@ -13,10 +13,10 @@ const Room = sequelize.define("room", {
   },
   game_id: {
     type: Sequelize.INTEGER,
-    // references:{
-    //   model: Game,
-    //   key: 'game_id',
-    // }
+    references:{
+      model: Game,
+      key: 'id',
+    }
   },
   game_title: {
     type: Sequelize.STRING,
@@ -27,17 +27,17 @@ const Room = sequelize.define("room", {
   },
   player1_id: {
     type: Sequelize.INTEGER,
-    // references:{
-    //   model: User,
-    //   key: 'player1_id',
-    // }
+    references:{
+      model: User,
+      key: 'id',
+    }
   },
   player2_id: {
     type: Sequelize.INTEGER,
-    // references:{
-    //   model: User,
-    //   key: 'player2_id',
-    // }
+    references:{
+      model: User,
+      key: 'id',
+    }
   },
   status: Sequelize.INTEGER,
   data: Sequelize.STRING,
