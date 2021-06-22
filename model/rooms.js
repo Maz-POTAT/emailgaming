@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 const sequelize = require("../utils/database");
-const User = require("./rooms");
+const User = require("./users");
 const Game = require("./games");
 
 const Room = sequelize.define("room", {
@@ -43,30 +43,30 @@ const Room = sequelize.define("room", {
   data: Sequelize.STRING,
 });
 
-Game.hasOne(Room, {
-  foreignKey: {
-    name: 'game_id',
-    allowNull: true
-  }
-});
-Room.belongsTo(Game);
-User.hasOne(Room, {
-  foreignKey: {
-    name: 'player1_id',
-    allowNull: true
-  }
-})
-Room.belongsTo(User);
-User.hasOne(Room, {
-  foreignKey: {
-    name: 'player2_id',
-    allowNull: true
-  }
-})
-Room.belongsTo(User);
+// Game.hasOne(Room, {
+//   foreignKey: {
+//     name: 'game_id',
+//     allowNull: true
+//   }
+// });
+// Room.belongsTo(Game);
+// User.hasOne(Room, {
+//   foreignKey: {
+//     name: 'player1_id',
+//     allowNull: true
+//   }
+// })
+// Room.belongsTo(User);
+// User.hasOne(Room, {
+//   foreignKey: {
+//     name: 'player2_id',
+//     allowNull: true
+//   }
+// })
+// Room.belongsTo(User);
 
-// Room.belongsTo(sequelize.models.user, {foreignKey: 'player1_id', as: 'Player1', constraints: false});
-// Room.belongsTo(sequelize.models.user, {foreignKey: 'player2_id', as: 'Player2', constraints: false});
-// Room.belongsTo(sequelize.models.game, {foreignKey: 'game_id', as: 'Game'});
+Room.belongsTo(sequelize.models.user, {foreignKey: 'player1_id', as: 'Player1', constraints: false});
+Room.belongsTo(sequelize.models.user, {foreignKey: 'player2_id', as: 'Player2', constraints: false});
+Room.belongsTo(sequelize.models.game, {foreignKey: 'game_id', as: 'Game'});
 
 module.exports = Room;
