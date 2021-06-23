@@ -31,8 +31,8 @@ exports.postCreateRandomRoom = async (req, res, next) => {
   let room = new Room({
     game_id: game_id,
     game_title: game_title,
-    player1_id: my_position == 0? user.id : 0,
-    player2_id: my_position == 1? user.id : 0,
+    player1_id: my_position == 0? user.id : null,
+    player2_id: my_position == 1? user.id : null,
     status: -1,
     data:'{}'
   });
