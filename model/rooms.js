@@ -27,6 +27,7 @@ const Room = sequelize.define("room", {
   },
   player1_id: {
     type: Sequelize.INTEGER,
+    allowNull : true
     // references:{
     //   model: User,
     //   key: 'player1_id',
@@ -34,6 +35,7 @@ const Room = sequelize.define("room", {
   },
   player2_id: {
     type: Sequelize.INTEGER,
+    allowNull : true
     // references:{
     //   model: User,
     //   key: 'player2_id',
