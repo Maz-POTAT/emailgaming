@@ -255,8 +255,15 @@ exports.getHome = async (req, res, next) => {
 
 exports.getJoinGame = async (req, res, next) => {
   let my_email = req.cookies.email;
+
+  let user = await User.findOne({ where: { email: my_email } });
+  let my_id = 0;
+  if(user){
+    my_id = user.id;
+  }
+
   let room = await Room.findAll({ 
-    where: { status: -1},
+    where: { status: -1, player1_id: { [Op.not] : my_id }, player2_id: { [Op.not] : my_id }},
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
