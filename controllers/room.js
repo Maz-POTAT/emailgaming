@@ -61,7 +61,7 @@ exports.postJoinRoom = async (req, res, next) => {
       return res.status(200).json( {success: false, errorMessage: "failed to join game"});
   }
 
-  let room = await User.findOne({ where: { id: room_id } });
+  let room = await Room.findOne({ where: { id: room_id } });
   if(!room){
     return res.status(200).json( {success: false, errorMessage: "failed to join game"});
   }
