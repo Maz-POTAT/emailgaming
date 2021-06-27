@@ -263,7 +263,7 @@ exports.getJoinGame = async (req, res, next) => {
   }
 
   let room = await Room.findAll({ 
-    where: { status: -1, player1_id: { [Op.not] : my_id }, player2_id: { [Op.not] : my_id }},
+    where: { status: -1, player1_id: { [Op.ne] : my_id }, player2_id: { [Op.ne] : my_id }},
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
@@ -272,7 +272,7 @@ exports.getJoinGame = async (req, res, next) => {
   }
 
   console.log(room);
-  
+
   res.render("join_game", {
     title: 'Join Game',
     active_page: 'join',
