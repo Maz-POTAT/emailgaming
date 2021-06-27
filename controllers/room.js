@@ -263,7 +263,7 @@ exports.getJoinGame = async (req, res, next) => {
   }
 
   let room = await Room.findAll({ 
-    where: { status: -1, player1_id: { [Op.ne] : my_id }, player2_id: { [Op.ne] : my_id }},
+    where: { status: -1, [Op.or]: [{player1_id: { [Op.ne] : my_id }}, {player1_id: { [Op.is] : null }}], [Op.or]: [{player2_id: { [Op.ne] : my_id }}, {player2_id: { [Op.is] : null }}]},
     include: [{ model: User, as: 'Player1'}, { model: User, as: 'Player2'}, { model: Game, as: 'Game'}] }
   );
 
