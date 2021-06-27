@@ -19,14 +19,12 @@
                 <div class="panel-body">
                     <% for(let i=0; i<games.length; i++) { %>
                         <div class="well">
-                            <div class="form-group">
-                                <label><%= games[i].name %></label>
-                                <p>
-                                    <%= games[i].description %>
-                                </p>
-                                <div class="row">
-                                    <a href="/start_game" class="btn btn-info col-md-offset-6 col-md-4">Start Game</a>
-                                </div>
+                            <label><%= games[i].name %></label>
+                            <p>
+                                <%= games[i].description %>
+                            </p>
+                            <div class="row">
+                                <a href="/start_game" class="btn btn-info col-md-offset-4 col-md-4">Start Game</a>
                             </div>
                             <!-- <% if(i != games.length-1) { %>
                                 <hr/>
