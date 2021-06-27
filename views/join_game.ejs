@@ -23,14 +23,14 @@
                     <span class="form-group input-group-btn">
                         <button class="btn btn-default" type="button">Player1:</button>
                       </span>
-                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player1.email == null ? '' : my_rooms[i].Player1.email %>">
+                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].player1_id == null  ? '' : my_rooms[i].Player1.email %>">
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="form-group input-group-btn">
                         <button class="btn btn-default" type="button">Player2:</button>
                       </span>
-                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].Player2.email == null ? '' : my_rooms[i].Player2.email %>">
+                    <input type="text" class="form-control" readonly value="<%= my_rooms[i].player2_id == null ? '' : my_rooms[i].Player2.email %>">
                 </div>
                 <br>
                 <div class="input-group">
