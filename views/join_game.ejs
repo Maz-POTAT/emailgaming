@@ -6,7 +6,7 @@
     </li>
 </ul>
 <% for(let i=0; i<my_rooms.length; i++) {%>
-    <div room_id="<%= my_rooms[i].id%>" class="col-md-4 col-sm-4 game_item" empty_position="<%=my_rooms[i].player1_id == null  ? 1 : 0 %>">
+    <div room_id="<%= my_rooms[i].id%>" class="col-md-4 col-sm-4 game_item" empty_position="<%=my_rooms[i].player1_id == null  ? 0 : 1 %>">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <%= my_rooms[i].Game.name %>
