@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $('body').on('click', '.join-game', function(){
-        var parent = $(this).closest('game_item');
+        var parent = $(this).closest('.game_item');
         var room_id = parent.attr('room_id');
         var empty_position = parent.attr('empty_position');
         $.ajax({
