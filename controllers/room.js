@@ -271,6 +271,8 @@ exports.getJoinGame = async (req, res, next) => {
     res.redirect('/');
   }
 
+  console.log(room);
+  
   res.render("join_game", {
     title: 'Join Game',
     active_page: 'join',
