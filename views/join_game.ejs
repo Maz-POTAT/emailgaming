@@ -6,7 +6,7 @@
     </li>
 </ul>
 <% for(let i=0; i<my_rooms.length; i++) {%>
-    <div class="col-md-4 col-sm-4">
+    <div room_id="<%= my_rooms[i].id%>" class="col-md-4 col-sm-4 game_item" empty_position="<%=my_rooms[i].player1_id == null  ? 1 : 0 %>">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <%= my_rooms[i].Game.name %>
@@ -45,12 +45,14 @@
             <div class="panel-footer">
                 <div class="row">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-info col-xs-offset-4 col-xs-4">Join</button>
+                        <button type="button" class="btn btn-info col-xs-offset-4 col-xs-4 join-game">Join</button>
+                    </div>
+                    <div id="alert_area_join_error">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 <% } %>
-<script src="assets/js/my_turns.js"></script>
+<script src="assets/js/join_game.js"></script>
 <%- include('./includes/end.ejs') %>

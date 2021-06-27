@@ -41,6 +41,44 @@ exports.postCreateRandomRoom = async (req, res, next) => {
   return res.status(200).json({success:true, my_email: req.cookies.email});
 };
 
+exports.postJoinRoom = async (req, res, next) => {
+  let room_id = req.body.room_id;
+  let my_position = req.body.my_position;
+  let my_email = req.cookies.email;
+
+  let user = await User.findOne({ where: { email: my_email } });
+  if (!user) {
+    let newPassword = generator.generate({
+      length: 10,
+      numbers: true
+    });
+    user = new User({
+      email: my_email,
+      password: newPassword
+    });
+    
+    if(!await user.save())
+      return res.status(200).json( {success: false, errorMessage: "failed to join game"});
+  }
+
+  let room = await User.findOne({ where: { id: room_id } });
+  if(!room){
+    return res.status(200).json( {success: false, errorMessage: "failed to join game"});
+  }
+
+  if(my_position == "0"){
+    room.player1_id = user.id;
+  }
+  else{
+    room.player2_id = user.id;
+  }
+  room.status = 0;
+  
+  if(!await room.save())
+    return res.status(200).json( {success: false, errorMessage: "failed to join game"});
+  return res.status(200).json({success:true, my_email: req.cookies.email});
+};
+
 exports.postCreateRoom = async (req, res, next) => {
   let game_id = req.body.game_id;
   let game_title = req.body.game_title;
