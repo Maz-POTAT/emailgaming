@@ -40,12 +40,12 @@
                          <div class="form-group">
                               <label>Notification</label>
                               <select id="user_notification" class="form-control" value=<%= notification %>>
-                                   <option value=0 selected="<%= notification == 0 %>">One Vale</option>
-                                   <option value=1 selected="<%= notification == 1 %>">Two Vale</option>
-                                   <option value=2 selected="<%= notification == 2 %>">Three Vale</option>
+                                   <option value=0 "<%= notification == 0 ? 'selected' : '' %>">One Vale</option>
+                                   <option value=1 "<%= notification == 1 ? 'selected' : '' %>">Two Vale</option>
+                                   <option value=2 "<%= notification == 2 ? 'selected' : '' %>">Three Vale</option>
                               </select>
                          </div>
-                         <button id="reset" type="button" class="btn btn-info">Reset </button>
+                         <button id="reset" type="button" class="btn btn-info">Change </button>
                          <div id="alert_area_reset_failed">
                          </div>
                     </form>
