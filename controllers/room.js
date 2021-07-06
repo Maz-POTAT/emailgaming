@@ -299,7 +299,7 @@ exports.getProfile = async (req, res, next) => {
   });
 };
 exports.postProfile = async (req, res, next) => {
-  my_email = req.body.user_email;
+  let my_email = req.body.user_email;
   let first_name = req.body.first_name;
   let last_name = req.body.last_name;
   let password = req.body.password;
