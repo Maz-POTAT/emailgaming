@@ -15,13 +15,13 @@
                          </div>
                          <div class="form-group">
                               <label>First Name</label>
-                              <input id="user_firstName" class="form-control" type="text" />
+                              <input id="user_firstName" class="form-control" type="text" value=<%= firstname %>/>
                               <div id="alert_area_user_name">
                               </div>
                          </div>
                          <div class="form-group">
                               <label>Last Name</label>
-                              <input id="user_lastName" class="form-control" type="text" />
+                              <input id="user_lastName" class="form-control" type="text" value=<%= lastname %> />
                               <div id="alert_area_user_name">
                               </div>
                          </div>
@@ -39,7 +39,7 @@
                          </div>
                          <div class="form-group">
                               <label>Notification</label>
-                              <select id="user_notification" class="form-control">
+                              <select id="user_notification" class="form-control" value=<%= notification %>>
                                    <option>One Vale</option>
                                    <option>Two Vale</option>
                                    <option>Three Vale</option>
