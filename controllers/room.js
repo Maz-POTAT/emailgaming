@@ -295,6 +295,7 @@ exports.getProfile = async (req, res, next) => {
     my_email: my_email,
     firstname: user.firstname,
     lastname: user.lastname,
+    password: user.password,
     notification: user.notification,
   });
 };
