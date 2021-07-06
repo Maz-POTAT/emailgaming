@@ -299,6 +299,7 @@ exports.getProfile = async (req, res, next) => {
   });
 };
 exports.postProfile = async (req, res, next) => {
+  my_email = req.body.user_email;
   let first_name = req.body.first_name;
   let last_name = req.body.last_name;
   let password = req.body.password;
@@ -306,13 +307,9 @@ exports.postProfile = async (req, res, next) => {
 
   let user = await User.findOne({ where: { email: my_email } });
   if (user) {
-    let newPassword = generator.generate({
-      length: 10,
-      numbers: true
-    });
     user.firstname = first_name;
     user.lastname = last_name;
-    user.password = first_name;
+    user.password = password;
     user.notification = notification;
     if(!await user.save())
       return res.status(200).json( {success: false, errorMessage: "failed to reset user profile!"});

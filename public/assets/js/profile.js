@@ -5,7 +5,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: '/reset_profile',
                 data: {
-                    first_name: $('#user_email').val(),
+                    user_email: $('#user_email').val(),
                     first_name: $('#user_firstName').val(),
                     last_name: $('#user_lastName').val(),
                     password: $('#user_password').val(),
