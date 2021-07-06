@@ -278,3 +278,20 @@ exports.getJoinGame = async (req, res, next) => {
     my_rooms: room.map(function(room_info){return room_info.dataValues}),
   });
 };
+
+exports.getProfile = async (req, res, next) => {
+  let my_email = req.cookies.email;
+
+  let user = await User.findOne({ where: { email: my_email } });
+  let my_id = 0;
+  if(user){
+    my_id = user.id;
+  }
+
+
+  res.render("profile", {
+    title: 'User Profile',
+    active_page: 'profile',
+    my_email: my_email,
+  });
+};
