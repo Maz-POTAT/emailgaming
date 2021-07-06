@@ -313,5 +313,6 @@ exports.postProfile = async (req, res, next) => {
     user.notification = notification;
     if(!await user.save())
       return res.status(200).json( {success: false, errorMessage: "failed to reset user profile!"});
+    return res.status(200).json({success:true, my_email: req.cookies.email});
   }
 };
